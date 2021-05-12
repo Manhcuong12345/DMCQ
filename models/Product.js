@@ -4,24 +4,15 @@ const Schema = mongoose.Schema
 const Product = new Schema({
     name: {
         type: String,
-        min: 10,
-        max: 30,
     },
     slug: {
         type: String,
-        min: 10,
-        max: 40
     },
     description: {
         type: String,
-        min: 10,
-        max: 3000
-
     },
     content: {
         type: String,
-        min: 20,
-        max: 3000
     },
     price: {
         type: Number,
