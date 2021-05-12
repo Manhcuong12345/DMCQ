@@ -1,0 +1,54 @@
+const User = require('../models/User')
+const _ = require('lodash')
+const jwt = require('jsonwebtoken')
+const { loginValidation, registerValidation } = require('../middleware/validationUser')
+
+class Usercontroller {
+
+    static async reg(req, res) {
+
+        const { error } = registerValidation(req.body)
+        if(error) return res.status(400).send(error.details[0].message)
+        const emailExist = await User.findOne({ email: req.body.email})
+        if(emailExist) return res.status(400).send({message: 'Email is exist in database'})
+
+        const { firstname, password, email, lastname, username, phone, address } = req.body
+        const user = new User({
+            firstname,
+            password,
+            email,
+            lastname,
+            username,
+            phone,
+            address
+        })
+        await user.generatePassword();
+        await user.save()
+        if (!user) return res.status(400).send({ error: 'Not save' })
+        res.send(_.pick(user, ['email', 'username', 'address']))
+
+    }
+
+    static async login(req, res) {
+
+        const {error} = loginValidation(req.body)
+        if(error) return res.status(400).send(error.details[0].message)
+
+        const user = await User.findOne({ email: req.body.email })
+        if (!user) return res.status(400).send({ message: 'email is worng in database' })
+        const isValid = await user.login(req.body.password) && (user.role === "user")
+        if (!isValid) return res.status(400).send({ message: 'Invalid username or password' })
+        const token = jwt.sign({ _id: user._id, role: user.role }, 'password')
+        res.header('auth-token', token).send(_.pick(req.body, ['email']))
+    }
+
+    static async token(req, res) {
+        res.send(req.user)
+    }
+
+}
+
+
+
+
+module.exports.Usercontroller = Usercontroller
