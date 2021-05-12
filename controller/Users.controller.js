@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const _ = require('lodash')
 const jwt = require('jsonwebtoken')
+
 const { loginValidation, registerValidation } = require('../middleware/validationUser')
 
 class Usercontroller {
@@ -48,9 +49,11 @@ class Usercontroller {
     }
 
     static async getall(req, res) {
-        const user = await User.find({})
+        const user = await User.find().populate('cart.product')
         if(!user) return res.status(404).send({message:'Not Found'})
         return res.status(200).send(user)
+       
+        
     }
 
 }
