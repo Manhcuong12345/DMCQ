@@ -18,7 +18,7 @@ class Categorycontroller {
     cat.save((error, category) => {
       if (error) return res.status(400).json({ message: 'Fail!' })
       if (category) {
-        return res.status(200).json({ message: 'Success category' })
+        return res.status(200).json(category)
       }
     })
   }

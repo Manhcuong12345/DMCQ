@@ -15,3 +15,5 @@ async function connect(){
 }
 
 module.exports = {connect}
+
+//mongodb+srv://manh:manh@cluster0.mkyci.mongodb.net/myFirstDatabase?retryWrites=true&w=majority

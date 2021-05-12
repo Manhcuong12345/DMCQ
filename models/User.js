@@ -8,7 +8,6 @@ const User = new Schema({
         type: String,
         min: 2,
         max: 20,
-        required: true
     },
     lastname: {
         type: String,
@@ -22,13 +21,11 @@ const User = new Schema({
     },
     email: {
         type: String,
-        required: true,
         min:15,
         max:30
     },
     password: {
         type: String,
-        required: true,
         min:8,
         max:20
     },

@@ -39,7 +39,7 @@ class Authscontroller {
 
           const user = await User.findOne({ email: req.body.email })
           if (!user) return res.status(400).send({ message: 'email is worng in database' })
-          const isValid = await user.login(req.body.password) && (user.role ==="admin")
+          const isValid = await user.login(req.body.password)
           if (!isValid) return res.status(400).send({ message: 'Invalid username or password' })
           const token = jwt.sign({ _id: user._id, role: user.role }, 'password')
           res.header('auth-token', token).send(_.pick(req.body, ['email']))

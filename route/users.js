@@ -6,6 +6,7 @@ const auth = require('../middleware/verifyToken')
 // const {userMiddleware} = require('../middleware/adminMiddlware')
 
 router.get('/token',auth,Usercontroller.token)
+router.get('/',Usercontroller.getall)
 router.post('/register',Usercontroller.reg)
 router.post('/login',Usercontroller.login)
 // router.get('/test', async (req, res) => {

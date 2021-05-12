@@ -6,7 +6,6 @@ const Product = new Schema({
         type: String,
         min: 10,
         max: 30,
-        required: true
     },
     slug: {
         type: String,
@@ -26,18 +25,16 @@ const Product = new Schema({
     },
     price: {
         type: Number,
-        required: true
     },
     quantity:{
         type: Number,
-        required: true
     },
-    price_sell: {
+    discount: {
         type: Number,
     },
-    product_img: [
-        { img: { type: String } }
-    ],
+    product_img: {
+        type: String
+    },
     reviews: [
         {
             userId: {
@@ -50,7 +47,6 @@ const Product = new Schema({
     category: {
         type: Schema.Types.ObjectId,
         ref: 'Category_Product',
-        required: true
     },
     createdBy: {
         type: Schema.Types.ObjectId,

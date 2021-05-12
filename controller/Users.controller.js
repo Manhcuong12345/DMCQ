@@ -38,12 +38,19 @@ class Usercontroller {
         if (!user) return res.status(400).send({ message: 'email is worng in database' })
         const isValid = await user.login(req.body.password) && (user.role === "user")
         if (!isValid) return res.status(400).send({ message: 'Invalid username or password' })
+        // res.send({_id: user._id})
         const token = jwt.sign({ _id: user._id, role: user.role }, 'password')
         res.header('auth-token', token).send(_.pick(req.body, ['email']))
     }
 
     static async token(req, res) {
         res.send(req.user)
+    }
+
+    static async getall(req, res) {
+        const user = await User.find({})
+        if(!user) return res.status(404).send({message:'Not Found'})
+        return res.status(200).send(user)
     }
 
 }
