@@ -7,6 +7,6 @@ const auth = require('../middleware/verifyToken')
 router.post('/',auth,upload.single('img'),Sliderscontroller.createSlide)
 router.delete('/:id',auth,Sliderscontroller.deleteSlider)
 router.put('/:id',auth,upload.single('img'),Sliderscontroller.updateSlider)
-router.get('/',auth,Sliderscontroller.getSlider)
+router.get('/',Sliderscontroller.getSlider)
 
 module.exports = router

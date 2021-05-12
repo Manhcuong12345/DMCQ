@@ -1,6 +1,6 @@
 const Product = require('../models/Product')
 const _ = require('lodash')
-const slugify = require('slugify')
+// const slugify = require('slugify')
 const fs = require('fs')
 
 class Productcontroller {
@@ -28,17 +28,17 @@ class Productcontroller {
 
     static async deleteProduct(req, res) {
         const products = await Product.findByIdAndDelete(req.params.id)
-        const paths = 'public' + products.product_img
-        try {
-            fs.unlink(paths, function (err) {
-                if (err) {
-                    console.log(err)
-                }
+        const path = 'public/' + products.product_img
+        try{
+            fs.unlink(path,function(err){
+                  if(err){
+                      console.log(err)
+                  }
             })
+        }catch(err){
+            console.log(err)
         }
-        catch (err) {
-            console.log(err.message)
-        }
+      
         if (!products) res.status(404).send({ error: 'Product not delete' })
         res.status(200).send({ message: 'Product delete success!' })
     }

@@ -5,6 +5,6 @@ const auth = require('../middleware/verifyToken')
 const {userMiddleware} = require('../middleware/adminMiddlware')
 
 router.post('/',auth,userMiddleware,Cartscontroller.addCart)
-router.get('/',auth,userMiddleware,Cartscontroller.getCart)
+router.get('/',auth,Cartscontroller.getCart)
 
 module.exports = router
