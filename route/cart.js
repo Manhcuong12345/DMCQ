@@ -4,7 +4,7 @@ const { Cartscontroller } = require('../controller/Cart.controller')
 const auth = require('../middleware/verifyToken')
 const {userMiddleware} = require('../middleware/adminMiddlware')
 
-router.post('/',auth,userMiddleware,Cartscontroller.addCart)
+router.post('/',auth,Cartscontroller.addCart)
 router.get('/',Cartscontroller.getCart)
 
 module.exports = router
