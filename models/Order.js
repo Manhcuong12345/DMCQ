@@ -16,7 +16,8 @@ const Order = new Schema({
     products: [
         {
             product: {
-                type: Schema.Types.Mixed
+                type: Schema.Types.Mixed,
+                ref:'Product'
             },
             number: {
                 type: Number,

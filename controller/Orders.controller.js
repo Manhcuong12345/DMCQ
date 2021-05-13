@@ -18,7 +18,7 @@ class Orderscontroller {
       return total + item.number * item.price
     }, 0)
 
-    const { status,address,city,name } = req.body
+    const { status,address,city } = req.body
 
     const order = await new Order({
       user:users,
