@@ -6,26 +6,31 @@ const _ = require('lodash')
 class Orderscontroller {
 
   static async createOrder(req, res) {
-    const user = await User.findById(req.user._id)
-    if (!user) return res.status(404).send({ err_message: "User not found" })
-    const products = user.cart.map(i => {
-      return { number: i.number, product: i.product }
+    const users = await User.findById(req.user._id)
+    if (!users) return res.status(404).send({ err_message: "User not found" })
+    //Lay ra thong tin tu phan cart cua khach hang
+    const products = users.cart.map(i => {
+      return { number: i.number, product: i.product, price: i.price}
     })
+  
     //Tong tien san pham
-    products.totalprice = user.cart.reduce((total, item) => {
+    products.totalprice = users.cart.reduce((total, item) => {
       return total + item.number * item.price
     }, 0)
 
-    const { status } = req.body
+    const { status,address,city,name } = req.body
 
     const order = await new Order({
-      products: products,
+      user:users,
       status: status,
+      address: address,
+      city: city,
+      products: products,
       totalprice: products.totalprice,
     })
 
     order.save()
-    if (!order) return res.status(400).send({ err_message: 'Is not save !' })
+    if (!order) return res.status(400).send({ err_message: 'Is not save Order !' })
     res.send(order)
   }
 
@@ -37,15 +42,17 @@ class Orderscontroller {
   }
 
   static async getOrder(req, res) {
-    const order = await Order.find({})
-      .populate({ 
-        path: 'products', populate: { 
-        path: 'product',populate: 'category' }})
+    const order = await Order.find({}).populate('products.product')
     if (!order) return res.status(404).send({ message: 'Not found!' })
     return res.status(200).send(order)
   }
 
 }
 
+
+ // .populate({ 
+      //   path: 'products', populate:{ 
+      //   path: 'product',populate: 'category' }
+      // })
 
 module.exports.Orderscontroller = Orderscontroller

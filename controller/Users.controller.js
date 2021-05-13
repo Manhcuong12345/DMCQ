@@ -26,7 +26,7 @@ class Usercontroller {
         await user.generatePassword();
         await user.save()
         if (!user) return res.status(400).send({ error: 'Not save' })
-        res.send(_.pick(user, ['email', 'username', 'address']))
+        res.send(_.pick(user, ['email', 'username', 'address','_id']))
 
     }
 

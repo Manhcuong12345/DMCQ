@@ -7,7 +7,7 @@ class Cartscontroller {
     static async addCart(req, res) {
         // const user =await User.findById(req.user._id)
         const user =await User.findById(req.user._id)
-        const cart_product = _.pick(req.body,['product', 'number'])
+        const cart_product = _.pick(req.body,['product', 'number','price'])
         if(!user) return res.status(404).send({err_message: "User not found"})
         user.cart = (!user.cart) ? [] : user.cart
         if(user.cart.length == 0){

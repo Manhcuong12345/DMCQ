@@ -3,19 +3,27 @@ const Schema = mongoose.Schema
 
 
 const Order = new Schema({
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
+    //chuoi hon hop
+    user:{
+        type: Schema.Types.Mixed
+    },
+    address:{
+        type:String
+    },
+    city:{
+        type:String
     },
     products: [
         {
             product: {
-                type: Schema.Types.ObjectId,
-                ref: 'Product'
+                type: Schema.Types.Mixed
             },
             number: {
                 type: Number,
             },
+            price:{
+                type: Number,
+            }
         }
     ],
     totalprice: {
@@ -26,10 +34,10 @@ const Order = new Schema({
         default:'Pending',
         required: true
     },
-    category:{
-        type:Schema.Types.ObjectId,
-        ref:'Category_Product'
-    }
+    // category:{
+    //     type:Schema.Types.ObjectId,
+    //     ref:'Category_Product'
+    // }
     // paymentType: {
     //     type: String,
     //     enum: ['home', 'card']

@@ -28,7 +28,7 @@ class Authscontroller {
           await user.generatePassword()
           await user.save()
           if (!user) return res.status(400).send({ message: 'Not save data' })
-          return res.status(200).send({ message: 'success!' })
+          res.send(_.pick(user, ['email', 'username', 'address','_id']))
 
      }
 
@@ -62,7 +62,7 @@ class Authscontroller {
      }
 
      static async getAll(req, res) {
-          const admin = await User.find()
+          const admin = await User.find({})
           if (!admin) return res.status(400).send({ message: 'Admin is not database' })
           res.send(admin)
      }

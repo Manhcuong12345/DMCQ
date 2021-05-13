@@ -46,11 +46,10 @@ const User = new Schema({
             },
             number:{
                type:Number,
-               default:0
             },
-        //    price:{
-        //        type:Number
-        //    }
+           price:{
+               type:Number
+           }
         }
     ],
     role:{
@@ -79,7 +78,5 @@ User.methods.login = async function(password){
 // }
 
 // }
-
-
 
 module.exports = mongoose.model('User', User)

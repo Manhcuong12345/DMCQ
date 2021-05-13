@@ -36,8 +36,6 @@ class Sliderscontroller {
     }
 
      static async updateSlider(req,res){
-        const formdata = req.body
-        formdata.img = req.file.filename
         const slider = await Slider.findOneAndUpdate({_id:req.params.id},formdata)
         if(req.file){
             try {
