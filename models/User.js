@@ -41,7 +41,7 @@ const User = new Schema({
     cart:[
         {
             product: {
-                type: Schema.Types.ObjectId,
+                type: Schema.Types.Mixed,
                 ref: "Product"
             },
             number:{
