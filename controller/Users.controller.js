@@ -41,7 +41,7 @@ class Usercontroller {
         if (!isValid) return res.status(400).send({ message: 'Invalid username or password' })
         // res.send({_id: user._id})
         const token = jwt.sign({ _id: user._id, role: user.role }, 'password')
-        res.header('auth-token', token).send('Login successful !')
+        res.header('auth-token', token).send(_.pick(req.body,['email','username']))
     }
 
     static async token(req, res) {
