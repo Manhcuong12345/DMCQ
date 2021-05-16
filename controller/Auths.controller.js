@@ -41,7 +41,7 @@ class Authscontroller {
           const isValid = await user.login(req.body.password)
           if (!isValid) return res.status(400).send({ message: 'Invalid username or password' })
           const token = jwt.sign({ _id: user._id }, 'password')
-          res.header('auth-token', token).send(_.pick(req.body,['email']))
+          res.header('Auth-token', token).send(_.pick(req.body,['email']))
      }
 
      static async token(req, res) {
