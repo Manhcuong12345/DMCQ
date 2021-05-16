@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const {Categorycontroller} = require('../controller/Category.controller')
 const auths = require('../middleware/verifyToken')
-const {adminMiddleware} = require('../middleware/adminMiddlware')
+// const {adminMiddleware} = require('../middleware/adminMiddlware')
 
 router.post('/',auths,Categorycontroller.createCategory)
 router.delete('/:id',auths,Categorycontroller.deleteCategory)

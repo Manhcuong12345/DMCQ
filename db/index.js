@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 async function connect(){
    try{
-    await mongoose.connect('mongodb+srv://manh:manh@cluster0.mkyci.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+    await mongoose.connect(process.env.DB_CONNECT, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
@@ -15,3 +15,4 @@ async function connect(){
 }
 
 module.exports = {connect}
+// mongodb+srv://manh:manh@cluster0.mkyci.mongodb.net/myFirstDatabase?retryWrites=true&w=majority

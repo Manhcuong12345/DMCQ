@@ -1,10 +1,12 @@
 const express = require('express')
 var bodyParser = require('body-parser')
 const db = require('./db')
+const dotenv = require('dotenv')
 // const cors = require('cors')
 const routes = require('./start_up/routes')
 const app = express()
 
+dotenv.config()
 // app.use(cors())
 app.use(express.static('public'))
 app.use(bodyParser.json())

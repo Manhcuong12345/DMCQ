@@ -3,7 +3,7 @@ const router = express.Router()
 const upload = require('../middleware/upload')
 const {Productcontroller} = require('../controller/Product.controller')
 const auth = require('../middleware/verifyToken')
-const{adminMiddleware} = require('../middleware/adminMiddlware')
+// const{adminMiddleware} = require('../middleware/adminMiddlware')
 
 router.get('/',Productcontroller.getAll)
 router.get('/:id', auth,Productcontroller.detailProduct)

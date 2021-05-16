@@ -40,8 +40,8 @@ class Authscontroller {
           if (!user) return res.status(400).send({ message: 'Email is not found' })
           const isValid = await user.login(req.body.password)
           if (!isValid) return res.status(400).send({ message: 'Invalid username or password' })
-          const token = jwt.sign({ _id: user._id }, 'password')
-          res.header('Auth-token', token).send(_.pick(req.body,['email']))
+          const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET)
+          res.header('auth-token', token).send('login success!')
      }
 
      static async token(req, res) {
