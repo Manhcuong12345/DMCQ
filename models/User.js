@@ -22,7 +22,7 @@ const User = new Schema({
     email: {
         type: String,
         min:15,
-        max:30
+        max:40
     },
     password: {
         type: String,

@@ -33,16 +33,15 @@ class Authscontroller {
      }
 
      static async login(req, res) {
-
           const { error } = loginValidation(req.body)
           if(error) return res.status(400).send(error.details[0].message)
 
-          const user = await User.findOne({ email: req.body.email })
-          if (!user) return res.status(400).send({ message: 'email is worng in database' })
+          const user = await User.findOne({ email:req.body.email})  
+          if (!user) return res.status(400).send({ message: 'Email is not found' })
           const isValid = await user.login(req.body.password)
           if (!isValid) return res.status(400).send({ message: 'Invalid username or password' })
           const token = jwt.sign({ _id: user._id }, 'password')
-          res.header('auth-token', token).send(_.pick(req.body,['email','username']))
+          res.header('auth-token', token).send(_.pick(req.body,['email']))
      }
 
      static async token(req, res) {

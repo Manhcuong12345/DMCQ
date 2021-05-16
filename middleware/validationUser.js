@@ -27,8 +27,8 @@ const registerValidation = data => {
 const loginValidation = data => {
     const schema = Joi.object({
         email: Joi.string()
-            .min(15),
-
+            .min(15)
+            .email(),
         password: Joi.string()
             .min(8)
 
