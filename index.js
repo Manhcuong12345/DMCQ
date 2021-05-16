@@ -7,27 +7,29 @@ const routes = require('./start_up/routes')
 const app = express()
 
 dotenv.config()
-// app.use(cors())
-app.use(express.static('public'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-db.connect()
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
     res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With")
-    if (req.method === 'OPTIONS') {
+    if(req.method === 'OPTIONS'){
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
         return res.status(200).json({})
     }
     next();
 })
 
+// app.use(cors())
+app.use(express.static('public'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:false}))
+
+db.connect()
+
 routes(app)
 
 //Dua len internet
 const PORT = process.env.PORT || 2000
 
-app.listen(PORT, () => {
+app.listen(PORT,()=>{
     console.log('Sever is running')
 })
