@@ -16,9 +16,9 @@ class Categorycontroller {
     //Luu du lieu nhap
     const cat = new Category_Product(categoryObj)
     cat.save((error, category) => {
-      if (error) return res.status(400).json({ message: 'Fail!' })
+      if (error) return res.status(400).send({ message: 'Fail!' })
       if (category) {
-        return res.status(200).json(category)
+        return res.status(200).send(category)
       }
     })
   }
