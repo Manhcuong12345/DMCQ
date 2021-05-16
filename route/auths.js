@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const {Authscontroller} = require('../controller/Auths.controller')
 const auth = require('../middleware/verifyToken')
-// const {adminMiddleware} = require('../middleware/adminMiddlware')
+const {adminMiddleware} = require('../middleware/adminMiddlware')
 
 
 router.get('/',Authscontroller.getAll)
