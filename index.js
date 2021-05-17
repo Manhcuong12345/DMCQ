@@ -11,8 +11,8 @@ dotenv.config()
 
 const corsOptions ={
     "origin":"*",
-    "methods":"GET,POST,PUT,DELETE",
-    "allowHeaders":"*"
+    "methods":"GET,POST,PUT,DELETE,PATCH,HEAD",
+    "allowedHeaders":"*"
 }
 app.use(cors(corsOptions))
 
