@@ -8,7 +8,8 @@ class Sliderscontroller {
 
         let props = _.pick(req.body, ['name','img'])
         if (req.file) {
-            props.img = '/img_product/' + req.file.filename
+            // props.img = '/img_product/' + req.file.filename
+            return res.status(500).send('An error occurred while uploading your file');
         }
         // const field = {name :name}
         // new Product(field) = new Product({name: name})
@@ -36,7 +37,7 @@ class Sliderscontroller {
     }
 
      static async updateSlider(req,res){
-        const slider = await Slider.findOneAndUpdate({_id:req.params.id},formdata)
+        const slider = await Slider.findOneAndUpdate(req.params.id)
         if(req.file){
             try {
                 const paths = 'public' + slider.img

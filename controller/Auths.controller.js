@@ -38,7 +38,7 @@ class Authscontroller {
 
           const user = await User.findOne({ email:req.body.email})  
           if (!user) return res.status(400).send({ message: 'Email is not found' })
-          const isValid = await user.login(req.body.password)
+          const isValid = await user.login(req.body.password) && (user.role === 'admin')
           if (!isValid) return res.status(400).send({ message: 'Invalid username or password' })
           const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET)
           res.header('x-auth-token', token).send({_id:user._id})
