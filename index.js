@@ -2,21 +2,20 @@ const express = require('express')
 var bodyParser = require('body-parser')
 const db = require('./db')
 const dotenv = require('dotenv')
-// const cors = require('cors')
+const cors = require('cors')
 const routes = require('./start_up/routes')
 const app = express()
 
 dotenv.config()
 
-app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With")
-    if(req.method === 'OPTIONS'){
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
-        return res.status(200).json({})
-    }
-    next();
-})
+
+const corsOptions ={
+    "origin":"*",
+    "methods":"GET,POST,PUT,DELETE",
+    "allowHeaders":"*"
+}
+app.use(cors(corsOptions))
+
 
 // app.use(cors())
 app.use(express.static('public'))

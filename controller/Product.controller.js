@@ -46,8 +46,8 @@ class Productcontroller {
     static async getAll(req, res) {
         //Loc san pham theo danh muc
         let filter = {}
-        if (req.query.Category_Product) {
-            filter = { category: req.query.Category_Product.split(',') }
+        if (req.query.categories) {
+            filter = { category: req.query.categories.split(',') }
         }
         const productList = await Product.find(filter).populate('category')
         if (!productList) res.status(404).send({ error: 'Not Found' })

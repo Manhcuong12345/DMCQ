@@ -7,6 +7,6 @@ const auth = require('../middleware/verifyToken')
 
 router.put('/:id',auth,Orderscontroller.updateStatus)
 router.post('/',auth,Orderscontroller.createOrder)
-router.get('/',Orderscontroller.getOrder)
+router.get('/',auth,Orderscontroller.getOrder)
 
 module.exports = router

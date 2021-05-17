@@ -42,6 +42,8 @@ class Orderscontroller {
   }
 
   static async getOrder(req, res) {
+    const user = await User.findById(req.user._id)
+    if(!user) return res.status(404).send({ message: 'User not found!'})
     const order = await Order.find({}).populate('products.product')
     if (!order) return res.status(404).send({ message: 'Not found!' })
     return res.status(200).send(order)
