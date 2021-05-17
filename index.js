@@ -12,14 +12,12 @@ dotenv.config()
 app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
-
 const corsOptions ={
     "origin":"*",
     "methods":"GET,POST,PUT,DELETE,PATCH,HEAD",
     "allowedHeaders":"*"
 }
 app.use(cors(corsOptions))
-
 db.connect()
 
 routes(app)
