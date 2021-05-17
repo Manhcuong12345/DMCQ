@@ -18,11 +18,3 @@ const upload = multer({
 
 module.exports = upload
 
-// const router = express.Router();
-
-//     router.post('/upload', upload.single('file'), (req, res) => {
-//         if(!req.file) {
-//             return res.status(500).send('An error occurred while uploading your file');
-//         }
-//         res.status(200).send('Hurray! File was uploaded.');
-//     });
