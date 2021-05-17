@@ -8,6 +8,10 @@ const app = express()
 
 dotenv.config()
 
+// app.use(cors())
+app.use(express.static('public'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:false}))
 
 const corsOptions ={
     "origin":"*",
@@ -15,12 +19,6 @@ const corsOptions ={
     "allowedHeaders":"*"
 }
 app.use(cors(corsOptions))
-
-
-// app.use(cors())
-app.use(express.static('public'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:false}))
 
 db.connect()
 
