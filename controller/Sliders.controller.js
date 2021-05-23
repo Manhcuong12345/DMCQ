@@ -5,10 +5,10 @@ const fs = require('fs')
 class Sliderscontroller {
    
     static async createSlide(req,res) {
-
+        // const linkurl = 'https://www.googleapis.com/drive/v3/files'
         let props = _.pick(req.body, ['name','img'])
         if (req.file) {
-            // props.img = '/img_product/' + req.file.filename
+            res.send(req.file)
             return res.status(500).send('An error occurred while uploading your file');
         }
         // const field = {name :name}
@@ -21,6 +21,7 @@ class Sliderscontroller {
 
     }
 
+   
     static async deleteSlider(req,res){
         const slider =  await Slider.findByIdAndDelete(req.params.id)
         const paths = 'public'+ slider.img
