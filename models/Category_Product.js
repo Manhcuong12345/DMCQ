@@ -3,14 +3,14 @@ const Schema = mongoose.Schema
 
 const Category_Product = new Schema({
     name: {
-        type: String, 
+        type: String,
         required: true,
-        trim:true
+        trim: true
     },
     slug: {
         type: String,
         required: true,
-        unique:true
+        unique: true
     },
     parentId: {
         type: String,

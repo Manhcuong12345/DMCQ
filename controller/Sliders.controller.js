@@ -8,8 +8,7 @@ class Sliderscontroller {
         // const linkurl = 'https://www.googleapis.com/drive/v3/files'
         let props = _.pick(req.body, ['name','img'])
         if (req.file) {
-            res.send(req.file)
-            return res.status(500).send('An error occurred while uploading your file');
+            props.product_img = '/img_product/' + req.file.filename
         }
         // const field = {name :name}
         // new Product(field) = new Product({name: name})

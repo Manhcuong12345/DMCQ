@@ -1,4 +1,5 @@
 const Product = require('../models/Product')
+// const Category_Product = require('../models/Category_Product')
 const _ = require('lodash')
 // const slugify = require('slugify')
 const fs = require('fs')
@@ -14,7 +15,7 @@ class Productcontroller {
         //         return { img: file.filename }
         //     })
         // }
-        let props = _.pick(req.body, ['name', 'description', 'content', 'quantity', 'category', 'price', 'createdBy', 'discount'])
+        let props = _.pick(req.body, ['name', 'description', 'content', 'quantity', 'category', 'price', 'createdBy', 'discount', 'slug'])
         if (req.file) {
             props.product_img = '/img_product/' + req.file.filename
         }
@@ -29,16 +30,16 @@ class Productcontroller {
     static async deleteProduct(req, res) {
         const products = await Product.findByIdAndDelete(req.params.id)
         const path = 'public/' + products.product_img
-        try{
-            fs.unlink(path,function(err){
-                  if(err){
-                      console.log(err)
-                  }
+        try {
+            fs.unlink(path, function (err) {
+                if (err) {
+                    console.log(err)
+                }
             })
-        }catch(err){
+        } catch (err) {
             console.log(err)
         }
-      
+
         if (!products) res.status(404).send({ error: 'Product not delete' })
         res.status(200).send({ message: 'Product delete success!' })
     }
@@ -53,6 +54,17 @@ class Productcontroller {
         if (!productList) res.status(404).send({ error: 'Not Found' })
         res.status(200).send(productList)
     }
+
+    // static async filterPrice(req, res) {
+    //     const { slug } = req.params
+    //     Category_Product.findOne({ slug: slug }).select('_id')
+    //         .exec((err, category) => {
+    //             if (err) {
+    //                 return res.status(400).send(error)
+    //             }
+    //                return res.status(200).send(category)
+    //         })
+    // }
 
     //Lay tung danh sach product 
     static async detailProduct(req, res) {
