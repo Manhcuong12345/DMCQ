@@ -10,6 +10,6 @@ router.post('/login',Authscontroller.login)
 router.post('/register',Authscontroller.reg)
 router.delete('/:id',auth,adminMiddleware,Authscontroller.deleteAdmin)
 router.put('/:id',auth,adminMiddleware,Authscontroller.updateAdmin)
-router.get('/token',auth,Authscontroller.token)
+// router.get('/token',auth,Authscontroller.token)
 
 module.exports = router

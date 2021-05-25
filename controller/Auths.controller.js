@@ -43,9 +43,9 @@ class Authscontroller {
           res.header('x-auth-token', token).send({_id:user._id})
      }
 
-     static async token(req, res) {
-          res.send(req.user)
-     }
+     // static async token(req, res) {
+     //      res.send(req.user)
+     // }
 
      static async deleteAdmin(req, res) {
           const admin = await User.findByIdAndDelete(req.params.id)
