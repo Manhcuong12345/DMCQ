@@ -6,7 +6,7 @@ const auth = require('../middleware/verifyToken')
 const { adminMiddleware } = require('../middleware/roleMiddlware')
 
 router.get('/', Productcontroller.getAll)
-router.get('/:id', auth, Productcontroller.detailProduct)
+router.get('/:id', Productcontroller.detailProduct)
 // router.get('/:slug',auth,Productcontroller.filterPrice)
 router.post('/', auth, adminMiddleware, upload.single("product_img"), Productcontroller.createProduct)
 router.delete('/:id', auth, adminMiddleware, Productcontroller.deleteProduct)
