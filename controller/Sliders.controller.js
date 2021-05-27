@@ -7,8 +7,10 @@ class Sliderscontroller {
     static async createSlide(req,res) {
         // const linkurl = 'https://www.googleapis.com/drive/v3/files'
         let props = _.pick(req.body, ['name','img'])
+        const host = 'https://lh3.google.com/u/0/d/'
         if (req.file) {
-            props.product_img = '/img_product/' + req.file.filename
+            // props.img = '/img_product/' + req.file.filename
+            props.img = host + req.file.fileId
         }
         // const field = {name :name}
         // new Product(field) = new Product({name: name})
@@ -23,34 +25,35 @@ class Sliderscontroller {
    
     static async deleteSlider(req,res){
         const slider =  await Slider.findByIdAndDelete(req.params.id)
-        const paths = 'public'+ slider.img
-        try {
-            fs.unlink(paths, function (err) {
-                console.log(err.message)
-            })
-        }
-        catch (err) {
-            console.log(err.message)
-        }
+        // const paths = 'public' + slider.img
+        // try {
+        //     fs.unlink(paths, function (err) {
+        //         console.log(err.message)
+        //     })
+        // }
+        // catch (err) {
+        //     console.log(err.message)
+        // }
         if(!slider) res.status(404).send({error:'Slider is not delete file'})
         res.send(slider)
     }
 
      static async updateSlider(req,res){
-        const slider = await Slider.findOneAndUpdate(req.params.id)
-        if(req.file){
-            try {
-                const paths = 'public' + slider.img
-                fs.unlink(paths, function(err){
-                    if (err) {
-                        console.log(err)
-                    }
-                })
-            }catch(err){
-                console.log(err)
-            }
-        }
-        res.send(slider)
+        const slider = await Slider.findByIdAndUpdate(req.params.id,req.body)
+        if(!slider) return res.status(400).send({ message: 'Not update'})
+        // if(req.file){
+        //     try {
+        //         const paths = 'public' + slider.img
+        //         fs.unlink(paths, function(err){
+        //             if (err) {
+        //                 console.log(err)
+        //             }
+        //         })
+        //     }catch(err){
+        //         console.log(err)
+        //     }
+        // }
+        return res.status(200).send(slider)
     }
 
     static async getSlider(req, res){

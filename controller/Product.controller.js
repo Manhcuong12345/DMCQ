@@ -15,8 +15,9 @@ class Productcontroller {
         //     })
         // }
         let props = _.pick(req.body, ['name', 'description', 'content', 'quantity', 'category', 'price', 'createdBy', 'discount', 'slug'])
+        let host = 'https://lh3.google.com/u/0/d/'
         if (req.file) {
-            props.product_img = '/img_product/' + req.file.filename
+            props.product_img = host + req.file.fileId
         }
         // const field = {name :name}
         // new Product(field) = new Product({name: name})
@@ -28,16 +29,16 @@ class Productcontroller {
 
     static async deleteProduct(req, res) {
         const products = await Product.findByIdAndDelete(req.params.id)
-        const path = 'public/' + products.product_img
-        try {
-            fs.unlink(path, function (err) {
-                if (err) {
-                    console.log(err)
-                }
-            })
-        } catch (err) {
-            console.log(err)
-        }
+        // const path = 'public/' + products.product_img
+        // try {
+        //     fs.unlink(path, function (err) {
+        //         if (err) {
+        //             console.log(err)
+        //         }
+        //     })
+        // } catch (err) {
+        //     console.log(err)
+        // }
 
         if (!products) res.status(404).send({ error: 'Product not delete' })
         res.status(200).send({ message: 'Product delete success!' })
