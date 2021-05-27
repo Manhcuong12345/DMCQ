@@ -7,7 +7,6 @@ const { adminMiddleware } = require('../middleware/roleMiddlware')
 
 router.get('/', Productcontroller.getAll)
 router.get('/:id', Productcontroller.detailProduct)
-// router.get('/:slug',auth,Productcontroller.filterPrice)
 router.post('/', auth, adminMiddleware, upload.single("product_img"), Productcontroller.createProduct)
 router.delete('/:id', auth, adminMiddleware, Productcontroller.deleteProduct)
 router.put('/:id', auth, adminMiddleware, upload.single('product_img'), Productcontroller.updateProduct)

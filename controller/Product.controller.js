@@ -1,5 +1,4 @@
 const Product = require('../models/Product')
-// const Category_Product = require('../models/Category_Product')
 const _ = require('lodash')
 // const slugify = require('slugify')
 const fs = require('fs')
@@ -50,21 +49,18 @@ class Productcontroller {
         if (req.query.categories) {
             filter = { category: req.query.categories.split(',') }
         }
+        if (req.query.increase) {
+            filter.price = { $gte: req.query.increase }
+        }
+        if (req.query.decrease) {
+            filter.price = { $lte: req.query.decrease }
+        }
         const productList = await Product.find(filter).populate('category')
+
         if (!productList) res.status(404).send({ error: 'Not Found' })
         res.status(200).send(productList)
     }
 
-    // static async filterPrice(req, res) {
-    //     const { slug } = req.params
-    //     Category_Product.findOne({ slug: slug }).select('_id')
-    //         .exec((err, category) => {
-    //             if (err) {
-    //                 return res.status(400).send(error)
-    //             }
-    //                return res.status(200).send(category)
-    //         })
-    // }
 
     //Lay tung danh sach product 
     static async detailProduct(req, res) {

@@ -6,7 +6,7 @@ class Cartscontroller {
 
     static async addCart(req, res) {
         // const user =await User.findById(req.user._id)
-        const user =await User.findById(req.user._id)
+        const user =await User.findById(req.user._id && req.user.role)
         const cart_product = _.pick(req.body,['product', 'number','price'])
         if(!user) return res.status(404).send({err_message: "User not found"})
         user.cart = (!user.cart) ? [] : user.cart
@@ -27,9 +27,12 @@ class Cartscontroller {
     }
 
     static async getCart(req, res){
+        if(req.user.role == 'admin'){
+            return res.status(404).send({err_message: "User not found"})
+        }
         const user = await User.findById(req.user._id).populate('cart.product');
         if(!user) return res.status(404).send({err_message: "User not found"})
-        user.cart = (!user.cart) ? [] : user.cart
+        // user.role = (!user.role === 'admin') ? [] : user.role==='admin'
         const { cart } = user
         res.send(cart)
     }
