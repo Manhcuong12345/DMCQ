@@ -5,12 +5,13 @@ const fs = require('fs')
 class Sliderscontroller {
    
     static async createSlide(req,res) {
-        // const linkurl = 'https://www.googleapis.com/drive/v3/files'
         let props = _.pick(req.body, ['name','img'])
         const host = 'https://lh3.google.com/u/0/d/'
         if (req.file) {
             // props.img = '/img_product/' + req.file.filename
             props.img = host + req.file.fileId
+            console.log(req.file.fileId)
+            console.log(host)
         }
         // const field = {name :name}
         // new Product(field) = new Product({name: name})

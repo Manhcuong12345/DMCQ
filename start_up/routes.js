@@ -6,6 +6,7 @@ const productRoute = require("../route/product")
 const orderRoute = require("../route/order")
 const categoryRoute = require("../route/category")
 const cartRoute = require("../route/cart")
+const dealRoute = require("../route/deal")
 
 
 
@@ -26,5 +27,5 @@ module.exports = function (app) {
     app.use('/api/order', orderRoute)
     app.use('/api/category', categoryRoute)
     app.use('/api/cart',cartRoute)
-
+    app.use('/api/bestdeal', dealRoute)
 }
